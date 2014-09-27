@@ -138,5 +138,4 @@ public class MainListActivity extends ListActivity {
         return isAvailable;
     }
 
-
 }
