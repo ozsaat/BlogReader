@@ -37,7 +37,7 @@ public class MainListActivity extends ListActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my_list);
+        setContentView(R.layout.activity_main_list);
 
         if (isNetworkAvailable()) {
             GetBlogPostsTask getBlogPostsTask = new GetBlogPostsTask();
