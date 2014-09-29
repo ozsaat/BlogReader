@@ -1,16 +1,20 @@
 package com.ozsaat.blogreader;
 
+import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -111,21 +115,7 @@ public class MainListActivity extends ListActivity {
                 updateList();
             }
 
-            private void updateList() {
-                if (mBlogData == null) {
-                    // TODO: Handle error
-                }
-                else {
-                    try {
-                        Log.d(TAG, mBlogData.toString(2));
-                    } catch (JSONException e) {
-                        Log.e(TAG, "Exception caught!", e);
-                    }
-                }
-            }
-
         }
-
 
     private boolean isNetworkAvailable() {
         ConnectivityManager manager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -138,4 +128,36 @@ public class MainListActivity extends ListActivity {
         return isAvailable;
     }
 
+
+// Dialog and button
+private void updateList() {
+        if (mBlogData == null) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle(getString(R.string.error_title));
+            builder.setMessage(getString(R.string.error_message));
+            builder.setPositiveButton(android.R.string.ok, null);
+            AlertDialog dialog = builder.create();
+            dialog.show();
+        }
+        else {
+            try {
+                JSONArray jsonPosts = mBlogData.getJSONArray("posts");
+                mBlogPostTitles = new String[jsonPosts.length()];
+                for (int i = 0; i < jsonPosts.length(); i++) {
+                    JSONObject post = jsonPosts.getJSONObject(i);
+                    String title = post.getString("title");
+                    title = Html.fromHtml(title).toString();
+                    mBlogPostTitles[i] = title;
+
+  // Below code causing errors when inside AsyncTask. Had to move.
+                }
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                        android.R.layout.simple_list_item_1, mBlogPostTitles);
+                setListAdapter(adapter);
+            }
+            catch (JSONException e) {
+                Log.e(TAG, "Exception caught!", e);
+            }
+        }
+    }
 }
