@@ -22,4 +22,6 @@
         <item>Jelly Bean</item>
     </string-array>
 
+    <string name="title_activity_blog_web_view">Blog Post</string>
+
 </resources>
