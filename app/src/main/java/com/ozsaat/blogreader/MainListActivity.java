@@ -90,7 +90,7 @@ public class MainListActivity extends ListActivity {
                         Reader reader = new InputStreamReader(inputStream);
                         int nextCharacter; // read() returns an int, cast to char later
                         String responseData = "";
-                        while(true){ // Infinate loop. Can only b stopped by a break
+                        while(true){ // Infinite loop. Can only b stopped by a break
                             nextCharacter = reader.read(); // read() without parameters returns one character
                             if(nextCharacter == -1) // A return value of -1 means we reached the end
                                 break;
