@@ -25,5 +25,6 @@
     <string name="title_activity_blog_web_view">Blog Post</string>
     <string name="action_share">title</string>
     <string name="share_user_title">How do you want to share?</string>
+    <string name="title_activity_rss_feed">RssFeedActivity</string>
 
 </resources>

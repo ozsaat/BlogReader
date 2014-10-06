@@ -23,6 +23,10 @@
             android:name=".BlogWebViewActivity"
             android:label="@string/title_activity_blog_web_view" >
         </activity>
+        <activity
+            android:name=".RssFeedActivity"
+            android:label="@string/title_activity_rss_feed">
+        </activity>
     </application>
 
 </manifest>
